@@ -29,7 +29,7 @@ namespace board
 
         public void putPiece(Piece p, Position pos){
             if (existPiece(pos)){
-                throw new BoardException("Já existe uma peça nessa posição!")
+                throw new BoardException("Já existe uma peça nessa posição!");
             }
             pieces[pos.Linha, pos.Coluna] = p;
             p.position = pos;

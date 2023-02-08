@@ -1,5 +1,5 @@
 using System;
-
+using board;
 
 namespace chess
 {
@@ -12,6 +12,10 @@ namespace chess
         public ChessPosition(char column, int line){
             this.column = column;
             this.line = line;
+        }
+
+        public Position toPosition(){
+            return new Position(8-line, column - 'a');
         }
 
         public override string ToString()
