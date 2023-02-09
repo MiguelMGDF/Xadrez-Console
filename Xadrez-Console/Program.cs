@@ -15,9 +15,7 @@ namespace Xadrez_Console
                 while (!chessMatch.ended){
                     try{
                         Console.Clear();
-                        Screen.printBoard(chessMatch.board);
-                        System.Console.WriteLine("\nTurn: " + chessMatch.turn);
-                        System.Console.WriteLine("Waiting play: " + chessMatch.currentPlayer);
+                        Screen.printMatch(chessMatch);
 
                         System.Console.Write("\nOrigin: ");
                         Position origin = Screen.readChessPosition().toPosition();
