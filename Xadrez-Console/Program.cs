@@ -13,21 +13,31 @@ namespace Xadrez_Console
                 ChessMatch chessMatch = new ChessMatch();
 
                 while (!chessMatch.ended){
-                    Console.Clear();
-                    Screen.printBoard(chessMatch.board);
+                    try{
+                        Console.Clear();
+                        Screen.printBoard(chessMatch.board);
+                        System.Console.WriteLine("\nTurn: " + chessMatch.turn);
+                        System.Console.WriteLine("Waiting play: " + chessMatch.currentPlayer);
 
-                    System.Console.Write("\nOrigin: ");
-                    Position origin = Screen.readChessPosition().toPosition();
+                        System.Console.Write("\nOrigin: ");
+                        Position origin = Screen.readChessPosition().toPosition();
+                        chessMatch.validateOriginPosition(origin);
 
-                    Console.Clear();
+                        Console.Clear();
 
-                    bool[,] possiblePositions = chessMatch.board.piece(origin).possibleMovements();
-                    Screen.printBoard(chessMatch.board, possiblePositions);
+                        bool[,] possiblePositions = chessMatch.board.piece(origin).possibleMovements();
+                        Screen.printBoard(chessMatch.board, possiblePositions);
 
-                    System.Console.Write("\nDestiny: ");
-                    Position destiny = Screen.readChessPosition().toPosition();
+                        System.Console.Write("\nDestiny: ");
+                        Position destiny = Screen.readChessPosition().toPosition();
+                        chessMatch.validateDestinyPosition(origin, destiny);
 
-                    chessMatch.performMovement(origin, destiny);
+                        chessMatch.makePlay(origin, destiny);
+                    }
+                    catch (BoardException e){
+                        System.Console.WriteLine(e.Message);
+                        System.Console.ReadLine();
+                    }
                 }
 
                 Screen.printBoard(chessMatch.board);
