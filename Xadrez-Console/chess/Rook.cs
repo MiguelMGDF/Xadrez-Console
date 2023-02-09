@@ -1,6 +1,7 @@
 using System;
 using board;
 
+
 namespace chess
 {
     class Rook : Piece
@@ -11,7 +12,8 @@ namespace chess
 
         public override string ToString()
         {
-            return "R";
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+            return "\u2656";
         }
 
         private bool canMove(Position pos){

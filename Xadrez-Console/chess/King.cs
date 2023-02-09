@@ -12,7 +12,8 @@ namespace chess
 
         public override string ToString()
         {
-            return "K";
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+            return "\u2654";
         }
 
         private bool canMove(Position pos){

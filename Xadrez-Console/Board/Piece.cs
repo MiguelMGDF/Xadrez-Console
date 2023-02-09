@@ -20,6 +20,10 @@ namespace board
             movements++;
         }
 
+        public void decrementMovements(){
+            movements--;
+        }
+
         public bool possibleMovementExist(){
             bool[,] mat = possibleMovements();
             for (int i = 0; i < board.linhas; i++){

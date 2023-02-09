@@ -15,6 +15,9 @@ namespace Xadrez_Console
             printCaptured(chessMatch);
             System.Console.WriteLine("\n\nTurn: " + chessMatch.turn);
             System.Console.WriteLine("Waiting play: " + chessMatch.currentPlayer);
+            if (chessMatch.check){
+                System.Console.WriteLine("CHECK!");
+            }
         }
 
         public static void printCaptured(ChessMatch chessMatch){
@@ -81,17 +84,20 @@ namespace Xadrez_Console
             if (piece == null){
                 System.Console.Write("-  ");
             }
-            else{ 
+            else{
+                Console.OutputEncoding = System.Text.Encoding.Unicode;
+                ConsoleColor aux = Console.ForegroundColor;
                 if (piece.color == Color.White){
                     System.Console.Write(piece);
                 }
                 else {
-                    ConsoleColor aux = Console.ForegroundColor;
+                    
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     System.Console.Write(piece);
-                    Console.ForegroundColor = aux;
+                    
                 }
                 System.Console.Write("  ");
+                Console.ForegroundColor = aux;
             }
         }
 
