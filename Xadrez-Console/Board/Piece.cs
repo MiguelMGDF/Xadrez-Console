@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace board
 {
-    public class Piece
+    abstract class Piece
     {
         public Position position {get; set;}
         public Color color { get; protected set; }
@@ -17,7 +14,12 @@ namespace board
             this.board = board;
             this.color = color;
             this.movements = 0;
-
         }
+
+        public void incrementMovements(){
+            movements++;
+        }
+
+        public abstract bool[,] possibleMovements();
     }
 }

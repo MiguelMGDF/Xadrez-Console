@@ -2,7 +2,7 @@ using System;
 
 namespace board
 {
-    public class Board
+    class Board
     {
         public int linhas { get; set; }
         public int colunas { get; set; }
@@ -33,6 +33,16 @@ namespace board
             }
             pieces[pos.Linha, pos.Coluna] = p;
             p.position = pos;
+        }
+
+        public Piece removePiece(Position pos){
+            if (piece(pos) == null){
+                return null;
+            }
+            Piece aux = piece(pos);
+            aux.position = null;
+            pieces[pos.Linha, pos.Coluna] = null;
+            return aux;
         }
 
         public bool validPos(Position pos){

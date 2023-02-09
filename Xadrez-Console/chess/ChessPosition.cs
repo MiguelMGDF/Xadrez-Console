@@ -3,7 +3,7 @@ using board;
 
 namespace chess
 {
-    public class ChessPosition
+    class ChessPosition
     {
         
         public char column { get; set; }

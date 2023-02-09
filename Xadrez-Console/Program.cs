@@ -8,16 +8,35 @@ namespace Xadrez_Console
     {
         static void Main(string[] args)
         {
+            try {
 
-            Board board = new Board(8,8);
+                ChessMatch chessMatch = new ChessMatch();
 
-            board.putPiece(new Rook(board, Color.White), new Position(0,0));
-            board.putPiece(new King(board, Color.Black), new Position(1,3));
-            board.putPiece(new Rook(board, Color.Black), new Position(2,4));
+                while (!chessMatch.ended){
+                    Console.Clear();
+                    Screen.printBoard(chessMatch.board);
 
-            Screen.printBoard(board);
+                    System.Console.Write("\nOrigin: ");
+                    Position origin = Screen.readChessPosition().toPosition();
 
-            Console.ReadLine();
+                    Console.Clear();
+
+                    bool[,] possiblePositions = chessMatch.board.piece(origin).possibleMovements();
+                    Screen.printBoard(chessMatch.board, possiblePositions);
+
+                    System.Console.Write("\nDestiny: ");
+                    Position destiny = Screen.readChessPosition().toPosition();
+
+                    chessMatch.performMovement(origin, destiny);
+                }
+
+                Screen.printBoard(chessMatch.board);
+
+                Console.ReadLine();
+            }
+            catch(BoardException e){
+                System.Console.WriteLine(e.Message);
+            }
 
         }
     }

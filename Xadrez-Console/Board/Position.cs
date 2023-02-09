@@ -1,7 +1,7 @@
 ﻿
 namespace board
 {
-    public class Position
+    class Position
     {
         public int Linha { get; set; }
         public int Coluna { get; set; }
@@ -15,6 +15,11 @@ namespace board
         public override string ToString()
         {
             return Linha + ", " + Coluna;
+        }
+
+        public void defineValue(int linha, int coluna){
+            this.Linha = linha;
+            this.Coluna = coluna;
         }
 
     }
