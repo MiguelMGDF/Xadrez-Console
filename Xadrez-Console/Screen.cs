@@ -14,10 +14,18 @@ namespace Xadrez_Console
             Screen.printBoard(chessMatch.board);
             printCaptured(chessMatch);
             System.Console.WriteLine("\n\nTurn: " + chessMatch.turn);
-            System.Console.WriteLine("Waiting play: " + chessMatch.currentPlayer);
-            if (chessMatch.check){
-                System.Console.WriteLine("CHECK!");
+
+            if (!chessMatch.ended){
+                System.Console.WriteLine("Waiting play: " + chessMatch.currentPlayer);
+                if (chessMatch.check){
+                    System.Console.WriteLine("CHECK!");
+                }
             }
+            else {
+                System.Console.WriteLine("CHECKMATE!!!");
+                System.Console.WriteLine("Winner: " + chessMatch.currentPlayer);
+            }
+            
         }
 
         public static void printCaptured(ChessMatch chessMatch){

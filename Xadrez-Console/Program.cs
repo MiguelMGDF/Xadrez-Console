@@ -38,6 +38,8 @@ namespace Xadrez_Console
                     }
                 }
 
+                Screen.printMatch(chessMatch);
+
                 Screen.printBoard(chessMatch.board);
 
                 Console.ReadLine();

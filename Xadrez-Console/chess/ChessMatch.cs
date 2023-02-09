@@ -62,8 +62,13 @@ namespace chess
                 check = false;
             }
 
-            turn++;
-            changePlayer();
+            if (testCheckmate(enemy(currentPlayer))){
+                ended = true;
+            }
+            else{
+                turn++;
+                changePlayer();
+            }
         }
 
         public void validateOriginPosition(Position pos){
@@ -107,7 +112,7 @@ namespace chess
 
         public HashSet<Piece> ingamePieces(Color color){
             HashSet<Piece> aux = new HashSet<Piece>();
-            foreach(Piece x in capturedPieces){
+            foreach(Piece x in pieces){
                 if (x.color == color){
                     aux.Add(x);
                 }
@@ -137,7 +142,7 @@ namespace chess
         public bool inCheck(Color color){
             Piece K = king(color);
             if (K == null){
-                throw new BoardException("King from color " + color + "does not exist");
+                throw new BoardException("King from color " + color + " does not exist");
             }
             foreach (Piece x in ingamePieces(enemy(color))){
                 bool[,] mat = x.possibleMovements();
@@ -148,6 +153,31 @@ namespace chess
             return false;
         }
 
+        public bool testCheckmate(Color color){
+            if (!inCheck(color)){
+                return false;
+            }
+            foreach(Piece x in ingamePieces(color)){
+                bool[,] mat = x.possibleMovements();
+                for (int i=0; i<board.linhas; i++){
+                    for (int j=0; j<board.colunas; j++){
+                        if(mat[i,j]){
+                            Position origin = x.position;
+                            Position destiny = new Position(i,j);
+                            Piece capturedPiece = performMovement(origin: origin, destiny);
+                            bool testCheck = inCheck(color);
+                            undoMovement(origin, destiny, capturedPiece);
+                            if (!testCheck){
+                                return false;
+                            }
+
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
         public void putNewPiece(char column, int line, Piece piece){
             board.putPiece(piece, new ChessPosition(column, line).toPosition());
             pieces.Add(piece);
@@ -155,9 +185,10 @@ namespace chess
 
         private void putPieces(){
             putNewPiece('c', 1, new Rook(board, Color.White));
-            putNewPiece('c', 2,new King(board, Color.Black));
-            putNewPiece('c', 3,new Rook(board, Color.White));
-            putNewPiece('c', 4,new King(board, Color.Black));            
+            putNewPiece('a', 8,new King(board, Color.Black));
+            putNewPiece('d', 1,new King(board, Color.White));
+            putNewPiece('b', 8,new Rook(board, Color.Black));
+            putNewPiece('h', 7,new Rook(board, Color.White));                        
             }
     }
 }
