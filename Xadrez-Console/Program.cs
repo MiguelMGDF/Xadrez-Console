@@ -24,6 +24,7 @@ namespace Xadrez_Console
                         Console.Clear();
 
                         bool[,] possiblePositions = chessMatch.board.piece(origin).possibleMovements();
+                        Console.WriteLine();
                         Screen.printBoard(chessMatch.board, possiblePositions);
 
                         System.Console.Write("\nDestiny: ");
